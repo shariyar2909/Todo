@@ -6,7 +6,7 @@ namespace Todo.BL
 {
     public class BLTodo : ITodo
     {
-        public List<TodoModel> GetTodo()
+        public  List<TodoModel> GetTodo()
         {
             List<TodoModel> todoList = new List<TodoModel>();
 

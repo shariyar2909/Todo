@@ -20,6 +20,7 @@ namespace Todo.Controllers
         public async Task<IActionResult> Get()
         {
             List<TodoModel> todoList = todo.GetTodo();
+            if(todoList == null) { return NotFound(); }
             return Ok(todoList);
         }
     }
