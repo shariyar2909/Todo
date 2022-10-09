@@ -28,9 +28,9 @@ namespace Todo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
+            services.AddControllers(options => options.EnableEndpointRouting = false);
             services.AddSingleton<ITodo, BLTodo>();
+            services.AddSingleton<BLTodo, BLTodo>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Todo", Version = "v1" });
@@ -41,6 +41,9 @@ namespace Todo
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(
+            options => options.WithOrigins().AllowAnyMethod()
+            );
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
